@@ -1,13 +1,69 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+    background-color: beige;
+    width: 100%;
+    font-size: 16px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app {
+    background-color: aqua;
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
 }
+
+header {
+    width: 100%;
+    background-color: blueviolet;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+header .logo {
+    width: 10rem;
+}
+
+.post-section {
+    padding: 2rem;
+    background-color: lightcyan;
+    border: 1px solid red;
+    align-self: flex-start;
+    width: 70%;
+}
+
+.post-block {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.post-block .post-title {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+.post-block .post-votes {
+    width: 20%;
+}
+.post-block .post-content {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.categories-section {
+    background-color: brown;
+    border: 1px solid red;
+    width: 20%;
+
+}
+
+
