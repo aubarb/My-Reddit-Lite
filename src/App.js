@@ -9,8 +9,7 @@ function App() {
   const [category, setCategory] = useState("popular");
 
   console.log(publications);
-  console.log(category);
-  // Fetch data from reddit.json link, receving an array of 15 objects each containing all info about 1 post. Looping over this data to push p only the data needed and setting the state.
+  // Fetch data from reddit.json link and according to category state. Rceive an array of 15 objects each containing all info about 1 post. Looping over this data to push to p only the data needed and setting the publication state.
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(`https://www.reddit.com/r/${category}/top.json?limit=15&t=month`);
@@ -38,7 +37,7 @@ function App() {
     fetchData();
   }, [category])
 
-  //Change category state when user selects on a category
+  //Change category state when user selects a category
   const handleCategory = (value) => setCategory(value);
 
 

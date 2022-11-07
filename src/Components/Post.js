@@ -4,6 +4,7 @@ export default function Post(props) {
 
     const { author, title, creationDate, score, numComments, isVideo, media, imageUrl, permalink } = props
 
+    // Format date: input is time posted in second since epoch, output is hours or days since posted.
     const dateFormating = () => {
         let hoursSincePosted = ((Date.now() / 1000) - creationDate) / 3600 ;
         if (hoursSincePosted < 24) {
@@ -21,16 +22,15 @@ export default function Post(props) {
             {
                 isVideo === false ?
                 <img className="post-image" src={imageUrl} />
-                : <video src={media} controls  />
+                : <video className="post-video" src={media.reddit_video.fallback_url} controls  />
             }
             {
 
             }
-            <p className="post-content">DISPLAY THIS ONLY IF IT IS NOT A VIDEO</p>
-            <h2 className="post-votes">{score}</h2>
-            <p className="post-author">{author}</p>
+            <h2 className="post-votes">Score: {score}</h2>
+            <p className="post-author">Posted by: {author}</p>
             <p className="post-date">{dateFormating()}</p>
-            <p className="post-comments">{numComments}</p>
+            <p className="post-comments">{numComments} comments</p>
         </div>
     )
 }
