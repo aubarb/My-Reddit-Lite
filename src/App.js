@@ -6,13 +6,17 @@ import Search from './Components/Search';
 function App() {
 
   const [publications, setPublications] = useState([]);
+  const [category, setCategory] = useState("popular");
 
+  console.log(publications);
+  console.log(category);
   // Fetch data from reddit.json link, receving an array of 15 objects each containing all info about 1 post. Looping over this data to push p only the data needed and setting the state.
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("https://www.reddit.com/r/popular/top.json?limit=15&t=month");
+      const res = await fetch(`https://www.reddit.com/r/${category}/top.json?limit=15&t=month`);
       const json = await res.json();
       const data = json.data.children;
+      console.log(data);
       let p = [];
       data.forEach(publication => {
         p.push({
@@ -21,6 +25,7 @@ function App() {
           title: publication.data.title,
           name: publication.data.name,
           score: publication.data.score,
+          creationDate: publication.data.created,
           numComments: publication.data.num_comments,
           isVideo: publication.data.is_video,
           media: publication.data.media,
@@ -31,10 +36,13 @@ function App() {
       setPublications(p);
     }
     fetchData();
-  }, [])
+  }, [category])
 
-  console.log(publications);
+  //Change category state when user selects on a category
+  const handleCategory = (value) => setCategory(value);
 
+
+  //Use data from publications state to create <Post /> components and pass down needed props.
   const publicationsEl = publications.map(publication => {
     return (
       <Post 
@@ -42,6 +50,7 @@ function App() {
         author={publication.author}
         title={publication.title}
         score={publication.score}
+        creationDate={publication.creationDate}
         numComments={publication.numComments}
         isVideo={publication.isVideo}
         media={publication.media}
@@ -60,7 +69,9 @@ function App() {
       <div className='post-section'>
         {publicationsEl}
       </div>
-      <Categories />
+      <Categories 
+        handleClick={handleCategory}
+      />
     </div>
   );
 }

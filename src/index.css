@@ -13,7 +13,6 @@ html {
     border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     align-items: center;
     padding: 0;
     margin: 0;
@@ -34,7 +33,6 @@ header .logo {
     padding: 2rem;
     background-color: lightcyan;
     border: 1px solid red;
-    align-self: flex-start;
     width: 70%;
 }
 
@@ -59,11 +57,21 @@ header .logo {
     text-align: center;
 }
 
-.categories-section {
-    background-color: brown;
-    border: 1px solid red;
-    width: 20%;
-
+.post-image {
+    max-width: 500px;
 }
 
+.categories-section {
+    position: fixed;
+    top: 20%;
+    right: 2%;
+    z-index: 100;
+    background-color: brown;
+    border: 1px solid red;
+    width: 15%;
+}
+
+.category-block:hover {
+    cursor: pointer;
+}
 
