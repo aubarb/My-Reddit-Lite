@@ -31,25 +31,7 @@ Useful data example key: value =>
     permalink: link of the post when we open it (gives access to comments);
 
 SEARCH
-using the search input bar & onChange / onSubmit attribute
-when user search for "item"
-need to display only <Post /> which title contains "item"
-if !item display = none
-
-[searchTerm, setSearchTerm] = useState
-
-//inside Post
-handleDisplay {
-    if (title contains searchTerm) {
-        return 
-    } else {
-        return "none"
-    }
-}
-
-Inside App
-handleSubmit {
-    setSearchTerm(submitValue)
-}
-
-Add a clear button?
+const [search, setSearch]
+input has event.target.value
+on submit ==> setSearch => event.target.value
+reload with search term?
