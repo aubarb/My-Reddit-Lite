@@ -1,7 +1,6 @@
 
   TODO Next:
-  See how to manage gallery  ?
-  Manage links is_reddit_media_domain
+  Load Comments
 
 
 LINK 
@@ -36,3 +35,13 @@ const [search, setSearch]
 input has event.target.value
 on submit ==> setSearch => event.target.value
 reload with search term?
+
+COMMENTS
+Receiving in eache publication[n].permalink : "/r/meirl/comments/ynu2gp/meirl/"
+first need to change to : https://www.reddit.com/r/meirl/comments/ynu2gp/meirl.json
+`https://www.reddit.com${permalink}.json`
+
+Now I have an array of comments for each post
+Need to create a block for comments that will be below the post
+By default it is dislay: none, onclick display = block
+inside this block I render xcomment by mapping over 

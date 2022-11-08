@@ -42,13 +42,12 @@ function App() {
     fetchData();
   }, [category])
 
+  
+
   //Change category state when user selects a category
   const handleCategory = (value) => setCategory(value);
 
   const handleChange = (event) => setSearch(event.target.value);
-
-  //Search for "space" in home: https://www.reddit.com/search/?q=space
-//Search for "space" in funny category: https://www.reddit.com/r/funny/search/?q=space&restrict_sr=1&sr_nsfw=
 
   const handleSubmit = (event) => {
     event.preventDefault();
