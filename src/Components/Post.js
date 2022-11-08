@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Post(props) {
 
-    const { author, title, creationDate, score, numComments, isVideo, media, imageUrl, permalink } = props
+    const { author, title, creationDate, score, numComments, isVideo, isMedia, isSelf, media, url, text, permalink } = props
 
     // Format date: input is time posted in second since epoch, output is hours or days since posted.
     const dateFormating = () => {
@@ -20,12 +20,15 @@ export default function Post(props) {
         <div className="post-block">
             <h1 className="post-title">{title}</h1>
             {
-                isVideo === false ?
-                <img className="post-image" src={imageUrl} />
-                : <video className="post-video" src={media.reddit_video.fallback_url} controls  />
-            }
-            {
-
+                isVideo 
+                    ? <video className="post-video" src={media.reddit_video.fallback_url} controls  />
+                    : isMedia 
+                        ? <img className="post-image" src={url} />
+                        : text 
+                            ? <p>{text}</p>
+                            : isSelf
+                                ? ""
+                                : <a href={url}>{url}</a>
             }
             <h2 className="post-votes">Score: {score}</h2>
             <p className="post-author">Posted by: {author}</p>

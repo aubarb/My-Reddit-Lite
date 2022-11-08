@@ -1,6 +1,7 @@
 
   TODO Next:
   See how to manage gallery  ?
+  Manage links is_reddit_media_domain
 
 
 LINK 

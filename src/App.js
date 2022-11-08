@@ -28,10 +28,13 @@ function App() {
           score: publication.data.score,
           creationDate: publication.data.created,
           numComments: publication.data.num_comments,
+          permalink: publication.data.permalink,
           isVideo: publication.data.is_video,
           media: publication.data.media,
-          imageUrl: publication.data.url,
-          permalink: publication.data.permalink
+          isMedia: publication.data.is_reddit_media_domain,
+          text: publication.data.selftext,
+          isSelf: publication.data.is_self,
+          url: publication.data.url,
         })
       })
       setPublications(p);
@@ -65,10 +68,13 @@ function App() {
           score: publication.data.score,
           creationDate: publication.data.created,
           numComments: publication.data.num_comments,
+          permalink: publication.data.permalink,
           isVideo: publication.data.is_video,
           media: publication.data.media,
-          imageUrl: publication.data.url,
-          permalink: publication.data.permalink
+          isMedia: publication.data.is_reddit_media_domain,
+          text: publication.data.selftext,
+          isSelf: publication.data.is_self,
+          url: publication.data.url,
         })
       })
       setPublications(p);
@@ -86,10 +92,13 @@ function App() {
         score={publication.score}
         creationDate={publication.creationDate}
         numComments={publication.numComments}
+        permalink={publication.permalink}
         isVideo={publication.isVideo}
         media={publication.media}
-        imageUrl={publication.imageUrl}
-        permalink={publication.permalink}
+        isMedia={publication.isMedia}
+        text={publication.text}
+        isSelf={publication.isSelf}
+        url={publication.url}
       />
     )
   })
