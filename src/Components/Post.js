@@ -12,11 +12,11 @@ export default function Post(props) {
     const dateFormating = () => {
         let hoursSincePosted = ((Date.now() / 1000) - creationDate) / 3600 ;
         if (hoursSincePosted < 24) {
-            return "Posted " + hoursSincePosted + " hours ago";
+            return hoursSincePosted + " hours ago";
         } else if (hoursSincePosted < 36){
-            return "Posted " + Math.round(hoursSincePosted / 24) + " day ago"
+            return Math.round(hoursSincePosted / 24) + " day ago"
         } else {
-            return "Posted " + Math.round(hoursSincePosted / 24) + " days ago"
+            return Math.round(hoursSincePosted / 24) + " days ago"
         }
     }
 
@@ -53,22 +53,26 @@ export default function Post(props) {
 
     return(
         <div className="post-block">
-            <h1 className="post-title">{title}</h1>
-            {
-                isVideo 
-                    ? <video className="post-video" src={media.reddit_video.fallback_url} controls  />
-                    : isMedia 
-                        ? <img className="post-image" src={url} />
-                        : text 
-                            ? <p>{text}</p>
-                            : isSelf
-                                ? ""
-                                : <a href={url}>{url}</a>
-            }
-            <h2 className="post-votes">Score: {score}</h2>
-            <p className="post-author">Posted by: {author}</p>
-            <p className="post-date">{dateFormating()}</p>
-            <p className="post-comments" onClick={handleDisplayComments} >{numComments} comments</p>
+            <h2 className="post-title">{title}</h2>
+            <div className="post-content">
+                {
+                    isVideo 
+                        ? <video className="post-video" src={media.reddit_video.fallback_url} controls  />
+                        : isMedia 
+                            ? <img className="post-image" src={url} />
+                            : text 
+                                ? <p>{text}</p>
+                                : isSelf
+                                    ? ""
+                                    : <a href={url}>{url}</a>
+                }
+            </div>
+            <div className="post-info">
+                <h4 className="post-votes">Score: {score}</h4>
+                <h4 className="post-author">Posted by: {author}</h4>
+                <h4 className="post-date">{dateFormating()}</h4>
+                <h4 className="post-comments" onClick={handleDisplayComments} >{numComments} comments</h4>
+            </div>
             {
                 displayComments &&
                 <div className="comment-block" >

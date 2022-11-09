@@ -102,18 +102,19 @@ function App() {
     )
   })
 
-
   return (
     <div className="app">
       <header>
-        <Search handleSubmit={handleSubmit} handleChange={handleChange} /> 
+        <img className="logo" src={require("./resources/images/reddit-logo.png")} />
+        <Search handleSubmit={handleSubmit} handleChange={handleChange} />
       </header>
+      <div className='category-section'>
+        <h1 className='topic'>/r</h1>
+        <Categories handleClick={handleCategory}/>
+      </div>
       <div className='post-section'>
         {publicationsEl}
       </div>
-      <Categories 
-        handleClick={handleCategory}
-      />
     </div>
   );
 }

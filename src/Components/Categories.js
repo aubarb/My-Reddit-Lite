@@ -3,27 +3,27 @@ import React from "react";
 export default function Categories({ handleClick }) {
 
     return(
-        <div className="categories-section">
-            <div  className="category-block" onClick={(event) => handleClick("popular")} >
-                <h1>Popular</h1>
+        <div className="categories-block">
+            <div  className="category-item one" onClick={(event) => handleClick("popular")} >
+                <h2>Popular</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("Economics")} >
-                <h1>Economics</h1>
+            <div className="category-item two" onClick={(event) => handleClick("Economics")} >
+                <h2>Economics</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("wallstreetbets")} >
-                <h1>Wall St Bets</h1>
+            <div className="category-item three" onClick={(event) => handleClick("wallstreetbets")} >
+                <h2>Wall St Bets</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("CryptoCurrency")} >
-                <h1>Crypto</h1>
+            <div className="category-item four" onClick={(event) => handleClick("CryptoCurrency")} >
+                <h2>Crypto</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("Cooking")} >
-                <h1>Cooking</h1>
+            <div className="category-item five" onClick={(event) => handleClick("Cooking")} >
+                <h2>Cooking</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("space")} >
-                <h1>Space</h1>
+            <div className="category-item six" onClick={(event) => handleClick("space")} >
+                <h2>Space</h2>
             </div>
-            <div className="category-block" onClick={(event) => handleClick("technology")} >
-                <h1>Tech</h1>
+            <div className="category-item seven" onClick={(event) => handleClick("technology")} >
+                <h2>Tech</h2>
             </div>
         </div>
     )
