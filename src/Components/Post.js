@@ -12,7 +12,7 @@ export default function Post(props) {
     const dateFormating = () => {
         let hoursSincePosted = ((Date.now() / 1000) - creationDate) / 3600 ;
         if (hoursSincePosted < 24) {
-            return hoursSincePosted + " hours ago";
+            return Math.round(hoursSincePosted) + " hours ago";
         } else if (hoursSincePosted < 36){
             return Math.round(hoursSincePosted / 24) + " day ago"
         } else {
@@ -26,7 +26,6 @@ export default function Post(props) {
             const res = await fetch(`https://www.reddit.com${permalink}.json`);
             const json = await res.json();
             const data = json[1].data.children
-            console.log(data);
             let c = [];
             data.forEach(comment => {
                 c.push({
@@ -56,15 +55,13 @@ export default function Post(props) {
             <h2 className="post-title">{title}</h2>
             <div className="post-content">
                 {
-                    isVideo 
-                        ? <video className="post-video" src={media.reddit_video.fallback_url} controls  />
-                        : isMedia 
-                            ? <img className="post-image" src={url} />
-                            : text 
-                                ? <p>{text}</p>
-                                : isSelf
-                                    ? ""
-                                    : <a href={url}>{url}</a>
+                    isMedia 
+                        ? <img className="post-image" src={url} />
+                        : text 
+                            ? <p>{text}</p>
+                            : isSelf
+                                ? ""
+                                : <a href={url}>{url}</a>
                 }
             </div>
             <div className="post-info">

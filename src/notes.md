@@ -45,3 +45,10 @@ Now I have an array of comments for each post
 Need to create a block for comments that will be below the post
 By default it is dislay: none, onclick display = block
 inside this block I render xcomment by mapping over 
+
+How to change style of what is selected?
+create state selected setSelected = empty array
+element have an id
+handleSelected = (id) => {
+  
+}

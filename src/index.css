@@ -24,6 +24,7 @@ html {
     padding: 0;
     margin: 0;
     --background-color: #CED0E8;
+    --dark-background-color: black;
     --block-color: #eaeef1;
     --title-font-color: #670c19;
     --text-font-color: #430C15;
@@ -34,7 +35,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Fira Sans', Sans-Serif;
-    
 }
 
 h1 {
@@ -49,7 +49,7 @@ h2 {
 }
 h3 {
     font-size: 1.4rem;
-    margin: 0;
+    margin: 1rem;
     padding: 0;
     color: var(--text-font-color)
 }
@@ -95,8 +95,8 @@ header .logo {
     width: 8rem;
     margin-left: 40px;
 }
-header .search-section {
-    margin: auto;
+header .logo:hover {
+    cursor: pointer;
 }
 header .search-section input {
     width: 200px;
@@ -113,6 +113,31 @@ header .search-section button {
     border-radius: 0px 20px 20px 0px;
     border: none;
     background-color: white;
+}
+header .search-section button:hover {
+    cursor: pointer;
+}
+header .filters {
+    display: flex;
+    margin: 1rem;
+    flex-direction: row;
+}
+header .filters h2 {
+    margin: 1rem;
+}
+header .filters h2:hover {
+    cursor: pointer;
+}
+
+.route {
+    margin: 1rem;
+    padding: 0 2rem;
+    background-color: var(--block-color);
+    box-shadow: var(--main-shadow);
+    text-align: center;
+}
+.route h3 {
+    margin: 0.5rem;
 }
 
 .category-section {
@@ -140,24 +165,24 @@ header .search-section button {
 }
 .category-item {
     background-color: var( --background-color);
-    opacity: 0.8;
     box-shadow: var(--main-shadow);
     border-radius: 40px;
     text-align: center;
 }
-.category-item h2 {
-    padding: 0 1rem;
+.category-item h3 {
+    padding: 0.1rem 0.3rem;
 }
 .category-item:hover {
-    opacity: 1;
     cursor: pointer;
     transform: scale(110%);
-    transition: transform 400ms, opacity 400ms;
+    transition: all 400ms;
+}
+.active {
+    background-color: #670c19;
 }
 
 .post-block {
     display: flex;
-    top: 10px;
     margin: 2rem;
     padding: 0 4rem;
     background-color: var(--block-color);
