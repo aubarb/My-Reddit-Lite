@@ -3,7 +3,7 @@ import React from "react";
 export default function Categories({ handleClick }) {
 
     return(
-        <div className="categories-block">
+        <div className="category-block">
             <div  className="category-item" onClick={(event) => handleClick("r/investing")} >
                 <h3>Investing</h3>
             </div>

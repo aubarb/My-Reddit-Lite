@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import Post from './Components/Post';
 import Categories from './Components/Categories';
 import Search from './Components/Search';
@@ -9,6 +9,7 @@ function App() {
   const [category, setCategory] = useState("r/investing");
   const [search, setSearch] = useState("")
   const [filter, setFilter] = useState('');
+  const [theme, setTheme] = useState('light');
 
   console.log(filter);
   //function to format fetched data correctly and be reused in fetch function.
@@ -72,8 +73,9 @@ function App() {
     fetchData();
   }
 
-  const handleSelection = () => {
-
+  const switchTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
   }
 
   //Use data from publications state to create <Post /> components and pass down needed props.
@@ -100,14 +102,18 @@ function App() {
   })
 
   return (
-    <div className="app">
-      <header>
+    <div className="app" data-theme={theme}>
+      <header id="top">
         <img onClick={(event) => handleCategory("r/investing")} className="logo" src={require("./resources/images/reddit-logo.png")} />
         <Search handleSubmit={handleSubmit} handleChange={handleChange} />
         <div className='filters'>
-          <h2 onClick={(event) => handleFilter("/hot")} className="inactive" >HOT</h2>
-          <h2 onClick={(event) => handleFilter("/new")}>NEW</h2>
-          <h2 onClick={(event) => handleFilter("/top")}>TOP</h2>
+          <h2 onClick={(event) => handleFilter("/hot")}>Hot</h2>
+          <h2 onClick={(event) => handleFilter("/new")}>New</h2>
+          <h2 onClick={(event) => handleFilter("/top")}>Top</h2>
+        </div>
+        <div className='dark-mode'>
+          <input type="checkbox" onClick={switchTheme} />
+          <h4>Dark Mode</h4>
         </div>
       </header>
       <div className='route'>
@@ -116,6 +122,9 @@ function App() {
       <div className='category-section'>
         <h1 className='topic'>/r</h1>
         <Categories handleClick={handleCategory}/>
+      </div>
+      <div className='upArrow'>
+        <a href="#top"><img  src={theme === "light" ? require("./resources/images/upArrow-dark.png") : require("./resources/images/upArrow-light.png")} /></a>
       </div>
       <div className='post-section'>
         {publicationsEl}
