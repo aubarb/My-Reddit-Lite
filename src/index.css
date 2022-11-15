@@ -41,7 +41,7 @@ body {
     overflow-x: hidden;
 }
 h1 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 400;
     font-family: var(--title-font);
     color: var(--title-font-color)
