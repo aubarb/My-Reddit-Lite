@@ -12,11 +12,9 @@ export default function Post(props) {
     const dateFormating = () => {
         let hoursSincePosted = ((Date.now() / 1000) - creationDate) / 3600 ;
         if (hoursSincePosted < 24) {
-            return Math.round(hoursSincePosted) + " hours ago";
-        } else if (hoursSincePosted < 36){
-            return Math.round(hoursSincePosted / 24) + " day ago"
+            return Math.round(hoursSincePosted) + "h ago";
         } else {
-            return Math.round(hoursSincePosted / 24) + " days ago"
+            return Math.round(hoursSincePosted / 24) + "d ago"
         }
     }
 
@@ -52,7 +50,7 @@ export default function Post(props) {
 
     return(
         <div className="post-block">
-            <h2 className="post-title">{title}</h2>
+            <h1 className="post-title">{title}</h1>
             <div className="post-content">
                 {
                     isMedia 
@@ -66,7 +64,7 @@ export default function Post(props) {
             </div>
             <div className="post-info">
                 <h4 className="post-votes">Score: {score}</h4>
-                <h4 className="post-author">Posted by: {author}</h4>
+                <h4 className="post-author">By {author}</h4>
                 <h4 className="post-date">{dateFormating()}</h4>
                 <h4 className="post-comments" onClick={handleDisplayComments} >{numComments} comments</h4>
             </div>

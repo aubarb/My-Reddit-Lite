@@ -111,16 +111,13 @@ function App() {
           <h2 onClick={(event) => handleFilter("/new")}>New</h2>
           <h2 onClick={(event) => handleFilter("/top")}>Top</h2>
         </div>
-        <div className='dark-mode'>
-          <input type="checkbox" onClick={switchTheme} />
-          <h4>Dark Mode</h4>
-        </div>
+        <img className='dark-mode' src={theme === "light" ? require("./resources/images/moon.png") : require("./resources/images/sun.png")} onClick={switchTheme} />
       </header>
       <div className='route'>
         <h3>{category} > {filter}</h3>
       </div>
       <div className='category-section'>
-        <h1 className='topic'>/r</h1>
+        <h1 className='r'>/r</h1>
         <Categories handleClick={handleCategory}/>
       </div>
       <div className='upArrow'>
