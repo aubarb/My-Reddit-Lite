@@ -1,6 +1,6 @@
 # My Reddit Lite
 
-My Reddit Lite is a light version of the Reddit website made to fit my needs and interests.
+My Reddit Lite is a light version of the Reddit website made to fit my needs and interests: https://my-reddit-l.web.app/
 
 ## Description
 
