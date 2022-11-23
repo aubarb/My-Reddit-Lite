@@ -5,6 +5,7 @@ const categoryItems = [
   ["r/investing", "Investing"],
   ["r/Economics", "Economics"],
   ["r/StockMarket", "Stock Market"],
+  // ...
 ];
 
 function App() {
@@ -16,24 +17,22 @@ function App() {
 
   //function to format fetched data correctly and be reused in fetch function.
   const formatData = (data) =>
-    data.map((publication) => {
-      return {
-        id: publication.data.id,
-        author: publication.data.author,
-        title: publication.data.title,
-        name: publication.data.name,
-        score: publication.data.score,
-        creationDate: publication.data.created,
-        numComments: publication.data.num_comments,
-        permalink: publication.data.permalink,
-        isVideo: publication.data.is_video,
-        media: publication.data.media,
-        isMedia: publication.data.is_reddit_media_domain,
-        text: publication.data.selftext,
-        isSelf: publication.data.is_self,
-        url: publication.data.url,
-      };
-    });
+    data.map((publication) => ({
+      id: publication.data.id,
+      author: publication.data.author,
+      title: publication.data.title,
+      name: publication.data.name,
+      score: publication.data.score,
+      creationDate: publication.data.created,
+      numComments: publication.data.num_comments,
+      permalink: publication.data.permalink,
+      isVideo: publication.data.is_video,
+      media: publication.data.media,
+      isMedia: publication.data.is_reddit_media_domain,
+      text: publication.data.selftext,
+      isSelf: publication.data.is_self,
+      url: publication.data.url,
+    }));
 
   // Fetch data from reddit.json link and according to category state. Rceive an array of 15 objects each containing all info about 1 post. Looping over this data to push to p only the data needed and setting the publication state.
   useEffect(() => {
@@ -134,28 +133,27 @@ function App() {
         </a>
       </div>
       <div className="post-section">
-        {publications &&
-          publications.map((publication) => {
-            if (!publication.isVideo) {
-              return (
-                <Post
-                  key={publication.id}
-                  author={publication.author}
-                  title={publication.title}
-                  score={publication.score}
-                  creationDate={publication.creationDate}
-                  numComments={publication.numComments}
-                  permalink={publication.permalink}
-                  isVideo={publication.isVideo}
-                  media={publication.media}
-                  isMedia={publication.isMedia}
-                  text={publication.text}
-                  isSelf={publication.isSelf}
-                  url={publication.url}
-                />
-              );
-            }
-          })}
+        {publications.map((publication) => {
+          if (!publication.isVideo) {
+            return (
+              <Post
+                key={publication.id}
+                author={publication.author}
+                title={publication.title}
+                score={publication.score}
+                creationDate={publication.creationDate}
+                numComments={publication.numComments}
+                permalink={publication.permalink}
+                isVideo={publication.isVideo}
+                media={publication.media}
+                isMedia={publication.isMedia}
+                text={publication.text}
+                isSelf={publication.isSelf}
+                url={publication.url}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );

@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from "react";
-import Comment from "./Comment";
 
-export default function Post(props) {
-  const {
-    author,
-    title,
-    creationDate,
-    score,
-    numComments,
-    isVideo,
-    isMedia,
-    isSelf,
-    media,
-    url,
-    text,
-    permalink,
-  } = props;
-
+export default function Post({
+  author,
+  title,
+  creationDate,
+  score,
+  numComments,
+  isMedia,
+  isSelf,
+  url,
+  text,
+  permalink,
+}) {
   const [comments, setComments] = useState([]);
   const [displayComments, setDisplayComments] = useState(false);
 
   // Format date: input is time posted in second since epoch, output is hours or days since posted.
   const dateFormating = () => {
     let hoursSincePosted = (Date.now() / 1000 - creationDate) / 3600;
-    if (hoursSincePosted < 24) {
-      return Math.round(hoursSincePosted) + "h ago";
-    } else {
-      return Math.round(hoursSincePosted / 24) + "d ago";
-    }
+
+    return hoursSincePosted < 24
+      ? Math.round(hoursSincePosted) + "h ago"
+      : Math.round(hoursSincePosted / 24) + "d ago";
   };
 
   //Fetch all comments for the post and set comments state
@@ -46,42 +40,50 @@ export default function Post(props) {
     fetchComments();
   }, [permalink]);
 
-  //Display or hide comments on click
-  const handleDisplayComments = () => {
-    setDisplayComments(!displayComments);
-  };
-
-  //Map over comments state to render a comment component
-  const commentsEl = comments.map((comment) => {
-    return <Comment body={comment.body} author={comment.author} />;
-  });
-
   return (
     <div className="post-block">
       <h1 className="post-title">{title}</h1>
       <div className="post-content">
-        {isMedia ? (
-          <img className="post-image" src={url} />
-        ) : text ? (
-          <p>{text}</p>
-        ) : isSelf ? (
-          ""
-        ) : (
-          <a href={url}>{url}</a>
-        )}
+        {
+          // C'est une mauvaise pratique d'utiliser les ternary operators lorsqu'il y a plus de deux possibilités,
+          // Dans ce cas j'utiliserais une IIFE
+          (() => {
+            if (isMedia) {
+              return <img className="post-image" src={url} />;
+            }
+            if (text) {
+              return <p>{text}</p>;
+            }
+            if (isSelf) {
+              return "";
+            }
+            return <a href={url}>{url}</a>;
+          })()
+        }
       </div>
       <div className="post-info">
         <h4 className="post-votes">Score: {score}</h4>
         <h4 className="post-author">By {author}</h4>
         <h4 className="post-date">{dateFormating()}</h4>
-        <h4 className="post-comments" onClick={handleDisplayComments}>
+        <h4
+          className="post-comments"
+          onClick={() => setDisplayComments(!displayComments)}
+        >
           {numComments} comments
         </h4>
       </div>
       {displayComments && (
         <div className="comment-block">
           <h2>Comments:</h2>
-          {commentsEl}
+          {comments.map((comment) => {
+            // Pas d'intérêt à extraire le code ci-dessous dans un component
+            return (
+              <div className="comment-item">
+                <h4>{comment.author}:</h4>
+                <p>{comment.body}</p>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
