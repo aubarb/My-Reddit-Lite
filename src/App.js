@@ -1,5 +1,5 @@
-import React, { useEffect, useState,  } from 'react';
-import Post from './Components/Post';
+import React, { useEffect, useState } from "react";
+import Post from "./Components/Post";
 
 const categoryItems = [
   ["r/investing", "Investing"],
@@ -13,13 +13,13 @@ const categoryItems = [
   ["r/javascript", "Javascript"],
   ["r/AskProgramming", "Ask Progr"],
   ["r/css", "CSS"],
-  ["r/Cooking", "Cooking"]
+  ["r/Cooking", "Cooking"],
 ];
 
 const filterItems = [
   ["/hot", "Hot"],
   ["/new", "New"],
-  ["/top", "top"]
+  ["/top", "top"],
 ];
 
 function App() {
@@ -29,27 +29,31 @@ function App() {
   const [filter, setFilter] = useState("");
   const [theme, setTheme] = useState("light");
 
+  console.log(publications);
+
   const formatData = (data) =>
-    data.map(publication => ({
-        id: publication.data.id,
-        author: publication.data.author,
-        title: publication.data.title,
-        name: publication.data.name,
-        score: publication.data.score,
-        creationDate: publication.data.created,
-        numComments: publication.data.num_comments,
-        permalink: publication.data.permalink,
-        isVideo: publication.data.is_video,
-        media: publication.data.media,
-        isMedia: publication.data.is_reddit_media_domain,
-        text: publication.data.selftext,
-        isSelf: publication.data.is_self,
-        url: publication.data.url,
+    data.map((publication) => ({
+      id: publication.data.id,
+      author: publication.data.author,
+      title: publication.data.title,
+      name: publication.data.name,
+      score: publication.data.score,
+      creationDate: publication.data.created,
+      numComments: publication.data.num_comments,
+      permalink: publication.data.permalink,
+      isVideo: publication.data.is_video,
+      media: publication.data.media,
+      isMedia: publication.data.is_reddit_media_domain,
+      text: publication.data.selftext,
+      isSelf: publication.data.is_self,
+      url: publication.data.url,
     }));
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`https://www.reddit.com/${category}${filter}.json?limit=30`);
+      const res = await fetch(
+        `https://www.reddit.com/${category}${filter}.json?limit=30`
+      );
       const json = await res.json();
       setPublications(formatData(json.data.children));
     }
@@ -61,7 +65,9 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     async function fetchData() {
-      const res = await fetch(`https://www.reddit.com/search.json?q=${search}&limit=30`);
+      const res = await fetch(
+        `https://www.reddit.com/search.json?q=${search}&limit=30`
+      );
       const json = await res.json();
       setPublications(formatData(json.data.children));
     }
@@ -71,75 +77,74 @@ function App() {
   return (
     <div className="app" data-theme={theme}>
       <header id="top">
-        <img 
-          onClick={() => setCategory("r/investing")} 
+        <img
+          onClick={() => setCategory("r/investing")}
           className="logo"
           alt="Reddit Logo"
-          src={require("./resources/images/reddit-logo.png")} 
+          src={require("./resources/images/reddit-logo.png")}
         />
         <form className="search-section">
-            <input placeholder="Search for..." onChange={handleChange} />
-            <button onClick={handleSubmit} >
-              <img 
-                src={require("./resources/images/search-icon.png")}
-                alt="Search icon"
-              />
-            </button>
+          <input placeholder="Search for..." onChange={handleChange} />
+          <button onClick={handleSubmit}>
+            <img
+              src={require("./resources/images/search-icon.png")}
+              alt="Search icon"
+            />
+          </button>
         </form>
-        <div className='filters'>
+        <div className="filters">
           {filterItems.map(([filter, filterName]) => {
-            return <h2 onClick={() => setFilter(filter)}>{filterName}</h2>
+            return <h2 onClick={() => setFilter(filter)}>{filterName}</h2>;
           })}
         </div>
-        -{" "}
         <img
           alt="dark mode icon"
           className="dark-mode "
           src={
-            theme === "light" 
-              ? require("./resources/images/moon.png") 
+            theme === "light"
+              ? require("./resources/images/moon.png")
               : require("./resources/images/sun.png")
-          } 
+          }
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         />
       </header>
-      <div className='route'>
+      <div className="route">
         <h3>
           {category} &gt; {filter}
         </h3>
       </div>
-      <div className='category-section'>
-        <h1 className='r'>/r</h1>
+      <div className="category-section">
+        <h1 className="r">/r</h1>
         <div className="category-block">
-            {categoryItems.map(([category, categoryName]) => {
-              return (
-                <div  
-                  className="category-item" 
-                  onClick={() => setCategory(category)} 
-                >
-                  <h3>{categoryName}</h3>
-                </div>
-              );
-            })}
+          {categoryItems.map(([category, categoryName]) => {
+            return (
+              <div
+                className="category-item"
+                onClick={() => setCategory(category)}
+              >
+                <h3>{categoryName}</h3>
+              </div>
+            );
+          })}
         </div>
       </div>
-      <div className='upArrow'>
+      <div className="upArrow">
         <a href="#top">
-          <img 
+          <img
             alt="Top arrow"
             src={
-              theme === "light" 
-                ? require("./resources/images/upArrow-dark.png") 
+              theme === "light"
+                ? require("./resources/images/upArrow-dark.png")
                 : require("./resources/images/upArrow-light.png")
-            } 
+            }
           />
         </a>
       </div>
-      <div className='post-section'>
+      <div className="post-section">
         {publications.map((publication) => {
           if (!publication.isVideo) {
             return (
-              <Post 
+              <Post
                 key={publication.id}
                 author={publication.author}
                 title={publication.title}
